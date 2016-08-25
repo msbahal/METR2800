@@ -1,0 +1,476 @@
+
+KillerSatellite.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  000002e2  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000026e  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000004  00800100  00800100  000002e2  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000002e2  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000314  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000058  00000000  00000000  00000350  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000459  00000000  00000000  000003a8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000016a  00000000  00000000  00000801  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000030a  00000000  00000000  0000096b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000000dc  00000000  00000000  00000c78  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000001e4  00000000  00000000  00000d54  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000000ec  00000000  00000000  00000f38  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000048  00000000  00000000  00001024  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 86 00 	jmp	0x10c	; 0x10c <__vector_14>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a4 30       	cpi	r26, 0x04	; 4
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 04 01 	call	0x208	; 0x208 <main>
+  88:	0c 94 35 01 	jmp	0x26a	; 0x26a <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <motorFwd>:
+	
+}
+
+// this function turns the motor in one direction
+void motorFwd(void){
+	PORTC |= 0b00010000;
+  90:	44 9a       	sbi	0x08, 4	; 8
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  92:	8f e3       	ldi	r24, 0x3F	; 63
+  94:	9c e9       	ldi	r25, 0x9C	; 156
+  96:	01 97       	sbiw	r24, 0x01	; 1
+  98:	f1 f7       	brne	.-4      	; 0x96 <motorFwd+0x6>
+  9a:	00 c0       	rjmp	.+0      	; 0x9c <motorFwd+0xc>
+  9c:	00 00       	nop
+	_delay_ms(20);
+	PORTC &= 0b11101111;
+  9e:	44 98       	cbi	0x08, 4	; 8
+  a0:	8f e3       	ldi	r24, 0x3F	; 63
+  a2:	9c e9       	ldi	r25, 0x9C	; 156
+  a4:	01 97       	sbiw	r24, 0x01	; 1
+  a6:	f1 f7       	brne	.-4      	; 0xa4 <motorFwd+0x14>
+  a8:	00 c0       	rjmp	.+0      	; 0xaa <motorFwd+0x1a>
+  aa:	00 00       	nop
+  ac:	08 95       	ret
+
+000000ae <motorReverse>:
+}
+
+//this funciton turns the motor in the opposite direction from the 
+//motorFwd function
+void motorReverse(void){
+	PORTC |= 0b00100000;
+  ae:	45 9a       	sbi	0x08, 5	; 8
+  b0:	8f e3       	ldi	r24, 0x3F	; 63
+  b2:	9c e9       	ldi	r25, 0x9C	; 156
+  b4:	01 97       	sbiw	r24, 0x01	; 1
+  b6:	f1 f7       	brne	.-4      	; 0xb4 <motorReverse+0x6>
+  b8:	00 c0       	rjmp	.+0      	; 0xba <motorReverse+0xc>
+  ba:	00 00       	nop
+	_delay_ms(20);
+	PORTC &= 0b11011111;
+  bc:	45 98       	cbi	0x08, 5	; 8
+  be:	8f e3       	ldi	r24, 0x3F	; 63
+  c0:	9c e9       	ldi	r25, 0x9C	; 156
+  c2:	01 97       	sbiw	r24, 0x01	; 1
+  c4:	f1 f7       	brne	.-4      	; 0xc2 <motorReverse+0x14>
+  c6:	00 c0       	rjmp	.+0      	; 0xc8 <motorReverse+0x1a>
+  c8:	00 00       	nop
+  ca:	08 95       	ret
+
+000000cc <checkIR>:
+}
+
+
+// check if the IR value is met and se the laser to come on
+void checkIR(void) {
+	if (senValue1 > ADC_THRES){
+  cc:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <senValue1>
+  d0:	90 91 03 01 	lds	r25, 0x0103	; 0x800103 <senValue1+0x1>
+  d4:	8f 35       	cpi	r24, 0x5F	; 95
+  d6:	91 40       	sbci	r25, 0x01	; 1
+  d8:	10 f0       	brcs	.+4      	; 0xde <checkIR+0x12>
+		PORTB |= 0b00000100;
+  da:	2a 9a       	sbi	0x05, 2	; 5
+  dc:	08 95       	ret
+	}
+	else {
+		PORTB &= 0b11111011;
+  de:	2a 98       	cbi	0x05, 2	; 5
+  e0:	08 95       	ret
+
+000000e2 <adc_val>:
+}
+	
+    
+
+uint16_t adc_val(uint8_t adcx){
+		ADMUX &= 0xf0; //select ADC 0 by setting all MUX to 0
+  e2:	ec e7       	ldi	r30, 0x7C	; 124
+  e4:	f0 e0       	ldi	r31, 0x00	; 0
+  e6:	90 81       	ld	r25, Z
+  e8:	90 7f       	andi	r25, 0xF0	; 240
+  ea:	90 83       	st	Z, r25
+		ADMUX |= adcx;
+  ec:	90 81       	ld	r25, Z
+  ee:	89 2b       	or	r24, r25
+  f0:	80 83       	st	Z, r24
+		
+		ADCSRA |= _BV(ADSC); // start conversion
+  f2:	ea e7       	ldi	r30, 0x7A	; 122
+  f4:	f0 e0       	ldi	r31, 0x00	; 0
+  f6:	80 81       	ld	r24, Z
+  f8:	80 64       	ori	r24, 0x40	; 64
+  fa:	80 83       	st	Z, r24
+		
+		while ( (ADCSRA & _BV(ADSC)) ); // wait until conversion is finished
+  fc:	80 81       	ld	r24, Z
+  fe:	86 fd       	sbrc	r24, 6
+ 100:	fd cf       	rjmp	.-6      	; 0xfc <adc_val+0x1a>
+										// can change for an interrupt
+		
+		return ADC;
+ 102:	80 91 78 00 	lds	r24, 0x0078	; 0x800078 <__TEXT_REGION_LENGTH__+0x7e0078>
+ 106:	90 91 79 00 	lds	r25, 0x0079	; 0x800079 <__TEXT_REGION_LENGTH__+0x7e0079>
+}
+ 10a:	08 95       	ret
+
+0000010c <__vector_14>:
+}
+
+// TIMER0 interrupt funciton. This function is executed everytime the 
+//OCCR0A register is matched
+ISR(TIMER0_COMPA_vect)
+{
+ 10c:	1f 92       	push	r1
+ 10e:	0f 92       	push	r0
+ 110:	0f b6       	in	r0, 0x3f	; 63
+ 112:	0f 92       	push	r0
+ 114:	11 24       	eor	r1, r1
+ 116:	2f 93       	push	r18
+ 118:	3f 93       	push	r19
+ 11a:	4f 93       	push	r20
+ 11c:	5f 93       	push	r21
+ 11e:	6f 93       	push	r22
+ 120:	7f 93       	push	r23
+ 122:	8f 93       	push	r24
+ 124:	9f 93       	push	r25
+ 126:	af 93       	push	r26
+ 128:	bf 93       	push	r27
+ 12a:	ef 93       	push	r30
+ 12c:	ff 93       	push	r31
+	extraTime++;
+ 12e:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <_edata>
+ 132:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <_edata+0x1>
+ 136:	01 96       	adiw	r24, 0x01	; 1
+	//only execute the function every 20 ms (whatever the value is below)
+	if(extraTime > 20)
+ 138:	85 31       	cpi	r24, 0x15	; 21
+ 13a:	91 05       	cpc	r25, r1
+ 13c:	2c f4       	brge	.+10     	; 0x148 <__vector_14+0x3c>
+
+// TIMER0 interrupt funciton. This function is executed everytime the 
+//OCCR0A register is matched
+ISR(TIMER0_COMPA_vect)
+{
+	extraTime++;
+ 13e:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <_edata+0x1>
+ 142:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+ 146:	0f c0       	rjmp	.+30     	; 0x166 <__vector_14+0x5a>
+	//only execute the function every 20 ms (whatever the value is below)
+	if(extraTime > 20)
+	{
+		extraTime = 0;
+ 148:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <_edata+0x1>
+ 14c:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <_edata>
+		PORTB ^= (1 << PORTB1);
+ 150:	95 b1       	in	r25, 0x05	; 5
+ 152:	82 e0       	ldi	r24, 0x02	; 2
+ 154:	89 27       	eor	r24, r25
+ 156:	85 b9       	out	0x05, r24	; 5
+
+		senValue1 = adc_val(ADC_IR1_PIN); // get sensor value from ADC pin 
+ 158:	80 e0       	ldi	r24, 0x00	; 0
+ 15a:	0e 94 71 00 	call	0xe2	; 0xe2 <adc_val>
+ 15e:	90 93 03 01 	sts	0x0103, r25	; 0x800103 <senValue1+0x1>
+ 162:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <senValue1>
+
+	}
+}
+ 166:	ff 91       	pop	r31
+ 168:	ef 91       	pop	r30
+ 16a:	bf 91       	pop	r27
+ 16c:	af 91       	pop	r26
+ 16e:	9f 91       	pop	r25
+ 170:	8f 91       	pop	r24
+ 172:	7f 91       	pop	r23
+ 174:	6f 91       	pop	r22
+ 176:	5f 91       	pop	r21
+ 178:	4f 91       	pop	r20
+ 17a:	3f 91       	pop	r19
+ 17c:	2f 91       	pop	r18
+ 17e:	0f 90       	pop	r0
+ 180:	0f be       	out	0x3f, r0	; 63
+ 182:	0f 90       	pop	r0
+ 184:	1f 90       	pop	r1
+ 186:	18 95       	reti
+
+00000188 <laserFire>:
+
+// This function sets the laser on for two seconds
+void laserFire ( void)
+{
+	// initial test- turn laser on twice to indicate start of program
+	PORTB = 0b00000100;
+ 188:	84 e0       	ldi	r24, 0x04	; 4
+ 18a:	85 b9       	out	0x05, r24	; 5
+ 18c:	2f ef       	ldi	r18, 0xFF	; 255
+ 18e:	83 ed       	ldi	r24, 0xD3	; 211
+ 190:	90 e3       	ldi	r25, 0x30	; 48
+ 192:	21 50       	subi	r18, 0x01	; 1
+ 194:	80 40       	sbci	r24, 0x00	; 0
+ 196:	90 40       	sbci	r25, 0x00	; 0
+ 198:	e1 f7       	brne	.-8      	; 0x192 <laserFire+0xa>
+ 19a:	00 c0       	rjmp	.+0      	; 0x19c <laserFire+0x14>
+ 19c:	00 00       	nop
+	_delay_ms(2000); // wait 2000 milliseconds
+
+	PORTB = 0b00000000;
+ 19e:	15 b8       	out	0x05, r1	; 5
+ 1a0:	2f ef       	ldi	r18, 0xFF	; 255
+ 1a2:	80 e7       	ldi	r24, 0x70	; 112
+ 1a4:	92 e0       	ldi	r25, 0x02	; 2
+ 1a6:	21 50       	subi	r18, 0x01	; 1
+ 1a8:	80 40       	sbci	r24, 0x00	; 0
+ 1aa:	90 40       	sbci	r25, 0x00	; 0
+ 1ac:	e1 f7       	brne	.-8      	; 0x1a6 <laserFire+0x1e>
+ 1ae:	00 c0       	rjmp	.+0      	; 0x1b0 <laserFire+0x28>
+ 1b0:	00 00       	nop
+ 1b2:	08 95       	ret
+
+000001b4 <laserFireInit>:
+	
+
+void laserFireInit ( void)
+{
+	// initial test- turn lazer on twice to indicate start of program
+	PORTB = 0b00000100;
+ 1b4:	84 e0       	ldi	r24, 0x04	; 4
+ 1b6:	85 b9       	out	0x05, r24	; 5
+ 1b8:	2f ef       	ldi	r18, 0xFF	; 255
+ 1ba:	34 e3       	ldi	r19, 0x34	; 52
+ 1bc:	9c e0       	ldi	r25, 0x0C	; 12
+ 1be:	21 50       	subi	r18, 0x01	; 1
+ 1c0:	30 40       	sbci	r19, 0x00	; 0
+ 1c2:	90 40       	sbci	r25, 0x00	; 0
+ 1c4:	e1 f7       	brne	.-8      	; 0x1be <laserFireInit+0xa>
+ 1c6:	00 c0       	rjmp	.+0      	; 0x1c8 <laserFireInit+0x14>
+ 1c8:	00 00       	nop
+	_delay_ms(500); // wait 500 milliseconds
+
+	PORTB = 0b00000000;
+ 1ca:	15 b8       	out	0x05, r1	; 5
+ 1cc:	2f ef       	ldi	r18, 0xFF	; 255
+ 1ce:	34 e3       	ldi	r19, 0x34	; 52
+ 1d0:	9c e0       	ldi	r25, 0x0C	; 12
+ 1d2:	21 50       	subi	r18, 0x01	; 1
+ 1d4:	30 40       	sbci	r19, 0x00	; 0
+ 1d6:	90 40       	sbci	r25, 0x00	; 0
+ 1d8:	e1 f7       	brne	.-8      	; 0x1d2 <laserFireInit+0x1e>
+ 1da:	00 c0       	rjmp	.+0      	; 0x1dc <laserFireInit+0x28>
+ 1dc:	00 00       	nop
+	_delay_ms(500); // wait 500 milliseconds
+
+	PORTB = 0b00000100;
+ 1de:	85 b9       	out	0x05, r24	; 5
+ 1e0:	2f ef       	ldi	r18, 0xFF	; 255
+ 1e2:	34 e3       	ldi	r19, 0x34	; 52
+ 1e4:	8c e0       	ldi	r24, 0x0C	; 12
+ 1e6:	21 50       	subi	r18, 0x01	; 1
+ 1e8:	30 40       	sbci	r19, 0x00	; 0
+ 1ea:	80 40       	sbci	r24, 0x00	; 0
+ 1ec:	e1 f7       	brne	.-8      	; 0x1e6 <laserFireInit+0x32>
+ 1ee:	00 c0       	rjmp	.+0      	; 0x1f0 <laserFireInit+0x3c>
+ 1f0:	00 00       	nop
+	_delay_ms(500); // wait 500 milliseconds
+
+	PORTB = 0b00000000;
+ 1f2:	15 b8       	out	0x05, r1	; 5
+ 1f4:	9f ef       	ldi	r25, 0xFF	; 255
+ 1f6:	24 e3       	ldi	r18, 0x34	; 52
+ 1f8:	3c e0       	ldi	r19, 0x0C	; 12
+ 1fa:	91 50       	subi	r25, 0x01	; 1
+ 1fc:	20 40       	sbci	r18, 0x00	; 0
+ 1fe:	30 40       	sbci	r19, 0x00	; 0
+ 200:	e1 f7       	brne	.-8      	; 0x1fa <laserFireInit+0x46>
+ 202:	00 c0       	rjmp	.+0      	; 0x204 <laserFireInit+0x50>
+ 204:	00 00       	nop
+ 206:	08 95       	ret
+
+00000208 <main>:
+
+
+// main function that runs the loop 
+int main(void)
+{
+	DDRB = 0xFF; // B registers as output
+ 208:	8f ef       	ldi	r24, 0xFF	; 255
+ 20a:	84 b9       	out	0x04, r24	; 4
+	DDRC = 0xF0; // C register as half input and half output
+ 20c:	80 ef       	ldi	r24, 0xF0	; 240
+ 20e:	87 b9       	out	0x07, r24	; 7
+	laserFireInit(); // initialise the system by two quick laser fires
+ 210:	0e 94 da 00 	call	0x1b4	; 0x1b4 <laserFireInit>
+	TCCR0A = (1 << WGM01); //Set CTC Bit - clear on timer compare
+ 214:	82 e0       	ldi	r24, 0x02	; 2
+ 216:	84 bd       	out	0x24, r24	; 36
+	OCR0A = 78; // correspons to a timer interrupt every ms
+ 218:	9e e4       	ldi	r25, 0x4E	; 78
+ 21a:	97 bd       	out	0x27, r25	; 39
+	TIMSK0 = (1 << OCIE0A); // activate interrupt function 
+ 21c:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <__TEXT_REGION_LENGTH__+0x7e006e>
+	sei(); // set all intrrupts
+ 220:	78 94       	sei
+	PORTB = 0x00; // B registers for input
+ 222:	15 b8       	out	0x05, r1	; 5
+	TCCR0B = (1 << CS02) | (1 << CS00); //start at 1024 prescalar
+ 224:	85 e0       	ldi	r24, 0x05	; 5
+ 226:	85 bd       	out	0x25, r24	; 37
+	
+	laserFire(); // two second laser fire
+ 228:	0e 94 c4 00 	call	0x188	; 0x188 <laserFire>
+
+	//IR sensing ADC
+	ADCSRA |= _BV(ADEN); // start ADC
+ 22c:	ea e7       	ldi	r30, 0x7A	; 122
+ 22e:	f0 e0       	ldi	r31, 0x00	; 0
+ 230:	80 81       	ld	r24, Z
+ 232:	80 68       	ori	r24, 0x80	; 128
+ 234:	80 83       	st	Z, r24
+
+	while(1){
+		//val = PIND & _BV(PD0);
+
+		// ******************IR Sensing ciruit*****************************
+		checkIR(); // check for IR value
+ 236:	0e 94 66 00 	call	0xcc	; 0xcc <checkIR>
+
+		while (PIND & _BV(PD0)){
+ 23a:	11 c0       	rjmp	.+34     	; 0x25e <main+0x56>
+			checkIR();
+ 23c:	0e 94 66 00 	call	0xcc	; 0xcc <checkIR>
+
+			// if both buttons are pressed
+			if (PIND & _BV(PD2)){
+ 240:	4a 9b       	sbis	0x09, 2	; 9
+ 242:	07 c0       	rjmp	.+14     	; 0x252 <main+0x4a>
+				PORTB &= 0b11100111; // turn both motor lights off
+ 244:	85 b1       	in	r24, 0x05	; 5
+ 246:	87 7e       	andi	r24, 0xE7	; 231
+ 248:	85 b9       	out	0x05, r24	; 5
+				PORTB |= 0b00001000; // turn the appropriate motor direction light on
+ 24a:	2b 9a       	sbi	0x05, 3	; 5
+				motorFwd();
+ 24c:	0e 94 48 00 	call	0x90	; 0x90 <motorFwd>
+ 250:	06 c0       	rjmp	.+12     	; 0x25e <main+0x56>
+			}
+			else { // if only the top button is pressed
+				PORTB &= 0b11100111;
+ 252:	85 b1       	in	r24, 0x05	; 5
+ 254:	87 7e       	andi	r24, 0xE7	; 231
+ 256:	85 b9       	out	0x05, r24	; 5
+				PORTB |= 0b00010000;
+ 258:	2c 9a       	sbi	0x05, 4	; 5
+				motorReverse();
+ 25a:	0e 94 57 00 	call	0xae	; 0xae <motorReverse>
+		//val = PIND & _BV(PD0);
+
+		// ******************IR Sensing ciruit*****************************
+		checkIR(); // check for IR value
+
+		while (PIND & _BV(PD0)){
+ 25e:	48 99       	sbic	0x09, 0	; 9
+ 260:	ed cf       	rjmp	.-38     	; 0x23c <main+0x34>
+				motorReverse();
+			}
+			
+		}
+		
+		PORTB &= 0b11100111; // turn the motor lights off
+ 262:	85 b1       	in	r24, 0x05	; 5
+ 264:	87 7e       	andi	r24, 0xE7	; 231
+ 266:	85 b9       	out	0x05, r24	; 5
+		
+	}
+ 268:	e6 cf       	rjmp	.-52     	; 0x236 <main+0x2e>
+
+0000026a <_exit>:
+ 26a:	f8 94       	cli
+
+0000026c <__stop_program>:
+ 26c:	ff cf       	rjmp	.-2      	; 0x26c <__stop_program>
